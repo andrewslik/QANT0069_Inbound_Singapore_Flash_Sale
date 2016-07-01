@@ -45,7 +45,7 @@ gulp.task('webserver', function () {
 
 gulp.task('zip', function() {
  return gulp.src('banner/*')
-   .pipe(zip('QANT0058_Flash_Sale_Template_300x600.zip'))
+   .pipe(zip('QANT0069_Inbound_Singapore_Flash_Sale_300x600.zip'))
    .pipe(gulp.dest('dist'));
 });
 
