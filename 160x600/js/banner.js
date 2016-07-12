@@ -27,7 +27,7 @@ function politeInit() {
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].is_default = false;
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].show_price = true;
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].show_countdown = false;
-    devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].JSON = "https:\/\/www.qantasflightdeals.com\/api\/search?&dealTypeCode=A&cheapestDealPerDistinctAirportPair=true&travelClass=ECO&tripType=R&quantity=1&marketingRegionCode=as&departureAirportCodes=SIN&arrivalAirportCodes=SYD&callback=callbackFunction";
+    devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].JSON = "https:\/\/www.qantasflightdeals.com\/api\/search?&dealTypeCode=A&cheapestDealPerDistinctAirportPair=true&travelClass=ECO&tripType=R&quantity=1&marketingRegionCode=as&departureAirportCodes=SIN&arrivalAirportCodes=ZQN&callback=callbackFunction";
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].URL = {};
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].URL.Url = "http://www.qantas.com/sg/en/flight-deals/dates-and-details.html/sin/syd/economy/lowest";
     devDynamicContent.Q117QantasSINDynamicFlashSale_Sheet1[0].bkgd_160x600_1 = {};
@@ -202,11 +202,23 @@ function loadFeed() {
 
             $("#from").html("Fly " + deal.departureAirport.airport.displayName + " to");
             $("#destination").html(deal.arrivalAirport.airport.displayName);
-            $("#price").html(deal.price.currencySymbol + deal.price.value + "<span id='asterix-char'>*</span>");
 
-            if (dest.length > 25) {
+            var priceCurrency = deal.price.currencySymbol
+            if(deal.price.currencySymbol.indexOf("$") > -1) {
+                var priceCurrency = priceCurrency.split("$")
+                var priceCurrency = priceCurrency[0]
+            }
+            $("#price").html(priceCurrency + deal.price.value + "<span id='asterix-char'>*</span>");
+
+
+
+
+            if (dest.length > 9) {
+                $("#destination").css("fontSize", "28px");
+            } else if(dest.length > 12) {
                 $("#destination").css("fontSize", "16px");
             }
+
 
             if (dest.indexOf("(") > -1) {
 
@@ -547,7 +559,9 @@ function startAnimation() {
       $("#from").hide()
       $(".fas-tagline-01").css('margin-bottom','0px')
 
-      if ( $("#destination").text().length >= 12) {
+      if ($("#destination").text().length >= 9) {
+        $("#destination").css({fontSize: '28px', lineHeight: '28px', marginTop:'40px'})
+      } else if ( $("#destination").text().length >= 12) {
         $("#destination").css({fontSize: '26px', lineHeight: '28px', marginTop:'40px'})
       } else {
         $("#destination").css({fontSize: '36px', lineHeight: '28px', marginTop:'40px'})

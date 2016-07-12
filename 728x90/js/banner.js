@@ -201,7 +201,13 @@ function loadFeed() {
 
             $("#from").html("Fly " + deal.departureAirport.airport.displayName + " to");
             $("#destination").html(deal.arrivalAirport.airport.displayName);
-            $("#price").html(deal.price.currencySymbol + deal.price.value + "<span id='asterix-char'>*</span>");
+
+            var priceCurrency = deal.price.currencySymbol
+            if(deal.price.currencySymbol.indexOf("$") > -1) {
+                var priceCurrency = priceCurrency.split("$")
+                var priceCurrency = priceCurrency[0]
+            }
+            $("#price").html(priceCurrency + deal.price.value + "<span id='asterix-char'>*</span>");
 
             if (dest.length > 25) {
                 $("#destination").css("fontSize", "16px");
